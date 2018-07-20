@@ -1,24 +1,30 @@
 import { Component } from '@stencil/core';
 
-
 @Component({
   tag: 'app-root',
-  styleUrl: 'app-root.css'
+  styleUrl: 'app-root.scss'
 })
 export class AppRoot {
-
+  
   render() {
     return (
       <div>
         <header>
-          <h1>Stencil App Starter</h1>
+          <div class='wrapper'>
+            <h1>
+              <stencil-route-link url='/' exact={true}>
+                <img src="https://new.myzap.com/images/png-icon/zap-web-md.png" class="header-logo" /> ZapMatch
+              </stencil-route-link>
+            </h1>
+          </div>
         </header>
 
-        <main>
+        <main class='wrapper'>
           <stencil-router>
             <stencil-route-switch scrollTopOffset={0}>
               <stencil-route url='/' component='app-home' exact={true} />
               <stencil-route url='/profile/:name' component='app-profile' />
+              <stencil-route url='/questions' component='app-questions' />
             </stencil-route-switch>
           </stencil-router>
         </main>

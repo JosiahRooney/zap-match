@@ -26,7 +26,6 @@ declare global {
 }
 
 import '@stencil/router';
-import '@stencil/state-tunnel';
 
 import {
   MatchResults,
@@ -93,6 +92,39 @@ declare global {
   namespace JSXElements {
     export interface AppProfileAttributes extends HTMLAttributes {
       'match'?: MatchResults;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface AppQuestions {
+
+    }
+  }
+
+  interface HTMLAppQuestionsElement extends StencilComponents.AppQuestions, HTMLStencilElement {}
+
+  var HTMLAppQuestionsElement: {
+    prototype: HTMLAppQuestionsElement;
+    new (): HTMLAppQuestionsElement;
+  };
+  interface HTMLElementTagNameMap {
+    'app-questions': HTMLAppQuestionsElement;
+  }
+  interface ElementTagNameMap {
+    'app-questions': HTMLAppQuestionsElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'app-questions': JSXElements.AppQuestionsAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface AppQuestionsAttributes extends HTMLAttributes {
+
     }
   }
 }

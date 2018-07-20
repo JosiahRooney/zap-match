@@ -1,0 +1,14 @@
+app-questions {
+  .question {
+    padding: 10px;
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+  .question__input {
+    text-align: center;
+    padding-top: 20px;
+  }
+}

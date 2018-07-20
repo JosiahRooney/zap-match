@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "@stencil/core": "^0.10.0",
-    "@stencil/router": "^0.2.2"
+    "@stencil/router": "^0.2.2",
+    "tsdom": "^0.6.8"
   },
   "devDependencies": {
+    "@stencil/sass": "0.0.5",
     "@types/jest": "^21.1.1",
     "jest": "^21.2.1"
   },

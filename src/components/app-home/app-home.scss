@@ -1,0 +1,49 @@
+.app-home {
+  padding: 10px;
+}
+
+input[type='text'] {
+  width: 100%;
+  font-size: 1.1em;
+  padding: 15px;
+  border-radius: 50px;
+  border: 1px solid #ddd;
+}
+
+/* DUMMY DATA CSS */
+
+.dummy-data {
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 15px 0 0 15px;
+  }
+
+  li {
+    margin: 0 -5px;
+    
+    &:hover {
+      background-color: #eee;
+    }
+  }
+
+  span {
+    font-weight: bold;
+  }
+
+  a {
+    padding: 5px;
+    color: inherit;
+    text-decoration: none;
+    display: block;
+  }
+
+  stencil-route-link {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* DUMMY DATA CSS end */
