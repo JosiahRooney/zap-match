@@ -9,17 +9,17 @@ export class AppRoot {
   render() {
     return (
       <div>
-        <header>
-          <div class='wrapper'>
+        {/* <header>
+          <div>
             <h1>
               <stencil-route-link url='/' exact={true}>
-                <img src="https://new.myzap.com/images/png-icon/zap-web-md.png" class="header-logo" /> ZapMatch
+                ZapMatch
               </stencil-route-link>
             </h1>
           </div>
-        </header>
+        </header> */}
 
-        <main class='wrapper'>
+        <main>
           <stencil-router>
             <stencil-route-switch scrollTopOffset={0}>
               <stencil-route url='/' component='app-home' exact={true} />

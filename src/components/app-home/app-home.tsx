@@ -6,56 +6,88 @@ import GoogleMapsLoader from 'google-maps';
   styleUrl: 'app-home.scss'
 })
 export class AppHome {
+  autocomplete: any;
+  place: any;
+  map: any;
+  marker: any;
+  input: HTMLInputElement;
+  
+  constructor() {
+    GoogleMapsLoader.KEY = 'AIzaSyDyzpVnlt5xY5GBItSQkyJpKOR2AlupIQI';
+    GoogleMapsLoader.LIBRARIES = ['places'];
+  }
 
   bindEvents() {
-    const input = document.querySelector('#app-location');
-    input.addEventListener('change', () => {
+    this.input = document.querySelector('#app-location');
+    const map = document.querySelector('#app-map');
+
+    GoogleMapsLoader.load((google) => {
+      this.autocomplete = new google.maps.places.Autocomplete(this.input);
+      this.autocomplete.addListener('place_changed', () => {
+        if (this.input.value === '') {
+          return false;
+        }
+
+        this.place = this.autocomplete.getPlace();
+        let latLng = {
+          lat: this.place.geometry.location.lat(),
+          lng: this.place.geometry.location.lng(),
+        }
+        this.map = new google.maps.Map(map, {
+          center: latLng,
+          zoom: 12,
+          disableDefaultUI: true
+        });
+
+        this.map.setCenter(latLng);
+        this.marker = new google.maps.Marker({
+          position: latLng,
+          map: this.map,
+          title: 'Hello world!'
+        });
+        this.marker.setMap(this.map);
+      });
+    });
+
+    this.input.addEventListener('focus', () => {
 
     });
   }
 
   componentDidLoad() {
-    GoogleMapsLoader.KEY = 'AIzaSyDyzpVnlt5xY5GBItSQkyJpKOR2AlupIQI';
-    GoogleMapsLoader.LIBRARIES = ['places'];
-    GoogleMapsLoader.load((google) => {
-      console.log(google)
-      const input = document.querySelector('#app-location');
-      new google.maps.places.Autocomplete(input);
-    })
-
     this.bindEvents();
   }
 
   render() {
-    let copy = 'Welcome! Choosing a real estate agent can be an overwhelming process. We are here to make it simple. Connect with an agent who is eager to help and get started on the journey to finding your dream home by answering a few quick questions.';
-    let secondaryCopy = 'Where are you looking to buy a home?';
-    let coords = JSON.stringify({
-      n: 32.7157,
-      w: 117.1611
-    });
+    let copy = 'Meet the perfect agent to help you buy a new home!';
+    let secondaryCopy = 'Where would you like to live?';
 
     return (
       <div class='app-home'>
 
-        <p>
-          {copy}
-        </p>
+        <div class="banner">
+          <div class="banner-images">
+            <img src="http://via.placeholder.com/120x120" alt=""/>
+            <img src="http://via.placeholder.com/120x120" alt="" />
+          </div>
+          <p class="primary-copy">
+            {copy}
+          </p>
+        </div>
 
-        <div class="form">
-          <p>
+        <div class="actions">
+          <p class="secondary-copy">
             {secondaryCopy}
           </p>
-          <input type="text" id="app-location" placeholder="Enter your location" />
-          <div class="dummy-data">
-            <ul>
-              <li><stencil-route-link url={`/questions/${coords}`}><span>San</span> Diego, CA</stencil-route-link></li>
-              <li><a href="#"><span>San</span> Francisco, CA</a></li>
-              <li><a href="#"><span>San</span> Jose, CA</a></li>
-              <li><a href="#"><span>San</span>ta Cruz, CA</a></li>
-              <li><a href="#"><span>San</span>ta Rosa, CA</a></li>
-            </ul>
+
+          <div class="form">
+            <input type="text" id="app-location" placeholder="Enter your location" />
           </div>
+
+          <button id="app-next">Next</button>
         </div>
+
+        <div class="map" id="app-map"></div>
       </div>
     );
   }
