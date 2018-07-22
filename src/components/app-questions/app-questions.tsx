@@ -1,4 +1,5 @@
-import { Component } from '@stencil/core';
+import { Component, Prop } from '@stencil/core';
+import { RouterHistory, MatchResults } from '@stencil/router';
 import tsdom from 'tsdom';
 
 @Component({
@@ -6,13 +7,15 @@ import tsdom from 'tsdom';
   styleUrl: 'app-questions.scss'
 })
 export class AppQuestions {
+  @Prop() history: RouterHistory;
+  @Prop() match: MatchResults;
+  
   questions: Array<HTMLElement> = [];
-  answers: Object = {};
+  answers: Array<Object> = [];
   currentQuestion: number = 0;
 
   constructor() {
     this.nextQuestion = this.nextQuestion.bind(this);
-    this.lastQuestion = this.lastQuestion.bind(this);
   }
 
   componentDidLoad() {
@@ -26,81 +29,71 @@ export class AppQuestions {
   }
 
   addAnswer(name, value) {
-    
+    this.answers.push({name, value: parseInt(value)});
   }
 
   getQuestions() {
     return [
       {
         name: 'dayTrip',
-        friendlyName: 'You are going on a day trip:',
+        friendlyName: 'You are going on a day trip. You:',
         isMulti: true,
         multi: [
-          'A. You plan what to do',
-          'B. You get in the car and go!'
+          'Plan the day from start to end.',
+          'Decide to what to do as the day goes on.'
         ]
       },
       {
         name: 'outgoing',
-        friendlyName: 'Would you rather go out with friends or stay at home?',
+        friendlyName: 'Would you rather:',
         isMulti: true,
         multi: [
-          'A. Go out with friends',
-          'B. Stay at home'
+          'Host a party',
+          'Be a guest',
+          'Stay at home'
         ]
       },
       {
         name: 'kitchen',
-        friendlyName: 'Do you usually cook at home or go out to dinner?',
+        friendlyName: 'Do you usually:',
         isMulti: true,
         multi: [
-          'A. Cook at home',
-          'B. Go out to dinner'
-        ]
-      },
-      {
-        name: 'school',
-        friendlyName: 'Do you want to live near a good school?',
-        isMulti: true,
-        multi: [
-          'A. Yes',
-          'B. Not important'
+          'Cook at home',
+          'Go out to dinner'
         ]
       }
     ];
   }
 
-  nextQuestion() {
+  nextQuestion(evt) {
+    let questionName = evt.target.dataset.name;
+    let questionValue = evt.target.dataset.value;
+
     if (this.currentQuestion === this.questions.length - 1) {
       // End the questionnaire
+      this.addAnswer(questionName, questionValue);
+      let coords = this.match.params.coords;
+      this.history.push({
+        pathname: `/results`, 
+        state: {
+          answers: this.answers,
+          coords
+        }
+      });
     } else {
+      this.addAnswer(questionName, questionValue);
       this.currentQuestion += 1;
       tsdom('.question.active').removeClass('active');
       this.questions[this.currentQuestion].classList.add('active');
     }
   }
 
-  lastQuestion() {
-    if (this.currentQuestion === 0) {
-      // Do nothing
-    } else {
-      this.currentQuestion -= 1;
-      tsdom('.question.active').removeClass('active');
-      this.questions[this.currentQuestion].classList.add('active');
-    }
-  }
-
   bindEvents() {
-    // let backBtns = tsdom('.btn-back');
-    // let nextBtns = tsdom('.btn-next');
+    let nextBtns = tsdom('.btn-next');
 
-    // backBtns.each(btn => {
-    //   btn.addEventListener('click', this.lastQuestion);
-    // });
-
-    // nextBtns.each(btn => {
-    //   btn.addEventListener('click', this.nextQuestion);
-    // });
+    nextBtns.each(btn => {
+      btn.addEventListener('click', this.nextQuestion);
+    });
   }
 
   generateQuestionsHtml() {
@@ -109,28 +102,24 @@ export class AppQuestions {
     questions.forEach((question, index) => {
       let input;
       let className = 'question';
+      
       if (index === 0) {
         className = 'question active';
       }
-      if (question.isMulti) {
-        let options = [];
-        question.multi.forEach((multi) => {
-          options.push(
-            <button value={multi}>{multi}</button>
-          )
-        });
-        input = (
-          <div class="question__input">
-            {options}
-          </div>
-        );
-      } else {
-        input = (
-          <div class="question__input">
-            <input type="text" placeholder={question.friendlyName} />
-          </div>
-        );
-      }
+
+      let options = [];
+      question.multi.forEach((multi, index) => {
+        options.push(
+          <button class="btn-next" data-name={question.name} data-value={index}>{multi}</button>
+        )
+      });
+
+      input = (
+        <div class="question__input">
+          {options}
+        </div>
+      );
+
       let htmlChunk = (
         <div class={className}>
           <div class="question__name">{question.friendlyName}</div>

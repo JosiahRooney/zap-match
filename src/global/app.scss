@@ -8,6 +8,9 @@
   Any global CSS variables should also be applied here.
 */
 
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0px;
@@ -26,17 +29,8 @@ button {
   border-radius: 4px;
   padding: 10px 30px;
   font-size: 0.8rem;
-  margin: 2.5px;
+  margin: 5px;
   cursor: pointer;
-
-  &.back {
-    color: #777;
-  }
-
-  &.next {
-    background-color: #28a745;
-    color: white;
-  }
 }
 
 .text-right {

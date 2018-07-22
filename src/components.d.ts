@@ -29,6 +29,7 @@ import '@stencil/router';
 
 import {
   MatchResults,
+  RouterHistory,
 } from '@stencil/router';
 
 declare global {
@@ -101,7 +102,8 @@ declare global {
 
   namespace StencilComponents {
     interface AppQuestions {
-
+      'history': RouterHistory;
+      'match': MatchResults;
     }
   }
 
@@ -124,7 +126,41 @@ declare global {
   }
   namespace JSXElements {
     export interface AppQuestionsAttributes extends HTMLAttributes {
+      'history'?: RouterHistory;
+      'match'?: MatchResults;
+    }
+  }
+}
 
+
+declare global {
+
+  namespace StencilComponents {
+    interface AppResults {
+      'history': RouterHistory;
+    }
+  }
+
+  interface HTMLAppResultsElement extends StencilComponents.AppResults, HTMLStencilElement {}
+
+  var HTMLAppResultsElement: {
+    prototype: HTMLAppResultsElement;
+    new (): HTMLAppResultsElement;
+  };
+  interface HTMLElementTagNameMap {
+    'app-results': HTMLAppResultsElement;
+  }
+  interface ElementTagNameMap {
+    'app-results': HTMLAppResultsElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'app-results': JSXElements.AppResultsAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface AppResultsAttributes extends HTMLAttributes {
+      'history'?: RouterHistory;
     }
   }
 }
