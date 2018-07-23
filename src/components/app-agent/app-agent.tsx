@@ -71,7 +71,7 @@ export class AppAgent {
           <div class="compatibility-metrics">
             <div class="compatibility-metric">
               <div class="image-container"><img src="assets/images/phone.png" alt=""/></div>
-              Communication Style
+              Communication style
             </div>
             <div class="compatibility-metric">
               <div class="image-container"><img src="assets/images/leaf.png" alt=""/></div>
