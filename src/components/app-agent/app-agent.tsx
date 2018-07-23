@@ -61,7 +61,7 @@ export class AppAgent {
           <p>{this.agent.name}</p>
         </div>
         <div class="agent__reviews">
-          ⭐⭐⭐⭐⭐ ({this.agent.reviews} reviews)
+          <img src="assets/images/stars.png" alt=""/> ({this.agent.reviews} reviews)
         </div>
         <div class="agent__details">
           <p>His favorite restaurant in Oakland: <span>Marzano</span></p>

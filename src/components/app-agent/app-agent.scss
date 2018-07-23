@@ -45,6 +45,11 @@ app-agent {
     .agent__reviews {
       text-align: center;
       font-size: 12px;
+
+      img {
+        position: relative;
+        top: 2px;
+      }
     }
 
     .agent__details {

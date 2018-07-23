@@ -121,6 +121,7 @@ export class AppQuestions {
   lastQuestion() {
     this.questions[this.currentQuestion].classList.remove('done');
     if (this.currentQuestion === 0) {
+      document.querySelector('.banner h1').classList.add('hide');
       this.history.go(-1);
     } else {
       this.currentQuestion -= 1;

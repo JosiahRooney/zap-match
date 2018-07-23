@@ -10,7 +10,7 @@ export class AppRoot {
     return (
       <div>
         <div class="banner">
-          <h1>
+          <h1 class="hide">
             <stencil-route-link url="/" exact={true}>
               ZapMatch
             </stencil-route-link>

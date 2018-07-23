@@ -58,6 +58,11 @@ body {
         font-size: 12px;
         margin: 0;
       }
+
+      img {
+        position: relative;
+        top: 2px;
+      }
     }
 
     .agent-card__match {

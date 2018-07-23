@@ -37,6 +37,9 @@ export class AppHome {
       return false;
     }
 
+    let h1 = document.querySelector('.banner h1');
+    h1.classList.remove('hide');
+
     // navigation to questions page
     this.history.push({
       pathname: `/questions`, 

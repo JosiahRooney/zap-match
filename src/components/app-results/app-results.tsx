@@ -105,7 +105,7 @@ export class AppResults {
                 <p>{agent.city}</p>
               </div>
               <div class="agent-card__reviews">
-                <p>⭐⭐⭐⭐⭐ ({agent.reviews} reviews)</p>
+                <p><img src="assets/images/stars.png" alt="" /> ({agent.reviews} reviews)</p>
               </div>
             </div>
             <div class="agent-card__match">
