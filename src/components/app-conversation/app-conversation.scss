@@ -46,6 +46,7 @@ app-conversation {
         margin: 24px;
 
         &.left-bubble {
+          margin-right: 80px;
           
           p {
             background-color: #f3f3f3;
@@ -74,6 +75,7 @@ app-conversation {
         }
 
         &.right-bubble {
+          margin-left: 80npx;
 
           p {
             background-color: #e9f1fc;
