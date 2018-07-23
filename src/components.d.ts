@@ -35,8 +35,41 @@ import {
 declare global {
 
   namespace StencilComponents {
-    interface AppHome {
+    interface AppAgent {
+      'history': RouterHistory;
+    }
+  }
 
+  interface HTMLAppAgentElement extends StencilComponents.AppAgent, HTMLStencilElement {}
+
+  var HTMLAppAgentElement: {
+    prototype: HTMLAppAgentElement;
+    new (): HTMLAppAgentElement;
+  };
+  interface HTMLElementTagNameMap {
+    'app-agent': HTMLAppAgentElement;
+  }
+  interface ElementTagNameMap {
+    'app-agent': HTMLAppAgentElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'app-agent': JSXElements.AppAgentAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface AppAgentAttributes extends HTMLAttributes {
+      'history'?: RouterHistory;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
+    interface AppHome {
+      'history': RouterHistory;
     }
   }
 
@@ -59,7 +92,7 @@ declare global {
   }
   namespace JSXElements {
     export interface AppHomeAttributes extends HTMLAttributes {
-
+      'history'?: RouterHistory;
     }
   }
 }

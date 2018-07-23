@@ -1,0 +1,92 @@
+body {
+  background-color: rgba(0,0,0,.05);
+}
+
+.app-results {
+  padding: 16px;
+
+  p {
+    margin: 0 0 10px;
+    font-size: 20px;
+  }
+
+  .agent-card {
+    background-color: #fff;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    padding: 16px;
+    box-shadow: 1px 1px 5px 0 rgba(0,0,0,.1);
+
+    .agent-card__photo,
+    .agent-card__center,
+    .agent-card__match {
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    .agent-card__photo { 
+      img {
+        border-radius: 50%;
+        margin-right: 16px;
+      }
+    }
+
+    .agent-card__center {
+      padding-right: 40px;
+    }
+
+    .agent-card__name {
+      padding-top: 5px;
+
+      p {
+        font-size: 20px;
+        margin: 0;
+      }
+    }
+
+    .agent-card__city {
+      p {
+        font-size: 14px;
+        margin: 0;
+        text-transform: uppercase;
+      }
+    }
+
+    .agent-card__reviews {
+      p {
+        font-size: 12px;
+        margin: 0;
+      }
+    }
+
+    .agent-card__match {
+      text-align: center;
+
+      .big {
+        font-size: 32px;
+        color: #569b0a;
+      }
+
+      .small {
+        font-size: 12px;
+      }
+    }
+
+    .agent-card__view-more {
+      text-align: center;
+      padding-top: 10px;
+      border-top: 1px solid rgba(0,0,0,.1);
+      margin-top: 16px;
+      margin-bottom: -4px;
+
+      div {
+        color: #3a9ff3;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+      }
+    }
+
+  }
+
+}

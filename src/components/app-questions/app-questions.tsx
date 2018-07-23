@@ -9,13 +9,15 @@ import tsdom from 'tsdom';
 export class AppQuestions {
   @Prop() history: RouterHistory;
   @Prop() match: MatchResults;
-  
+  state: any = {};
+  locationInfo: any;
   questions: Array<HTMLElement> = [];
   answers: Array<Object> = [];
   currentQuestion: number = 0;
 
   constructor() {
     this.nextQuestion = this.nextQuestion.bind(this);
+    this.submitQuestionnaire = this.submitQuestionnaire.bind(this);
   }
 
   componentDidLoad() {
@@ -25,6 +27,7 @@ export class AppQuestions {
         this.questions.push(el);
       });
     }
+    this.locationInfo = this.history.location.state.locationInfo;
     this.bindEvents();
   }
 
@@ -35,51 +38,74 @@ export class AppQuestions {
   getQuestions() {
     return [
       {
-        name: 'dayTrip',
-        friendlyName: 'You are going on a day trip. You:',
+        name: 'learning',
+        friendlyName: 'I prefer:',
         isMulti: true,
         multi: [
-          'Plan the day from start to end.',
-          'Decide to what to do as the day goes on.'
+          {
+            choice: 'Learning things on my own',
+            image: 'assets/images/learning2.png'
+          },
+          {
+            choice: 'Having someone teach me',
+            image: 'assets/images/learning.png'
+          }
         ]
       },
       {
-        name: 'outgoing',
-        friendlyName: 'Would you rather:',
+        name: 'eating',
+        friendlyName: 'I prefer:',
         isMulti: true,
         multi: [
-          'Host a party',
-          'Be a guest',
-          'Stay at home'
+          {
+            choice:'Eating a home-cooked meal',
+            image: 'assets/images/eating.png'
+          },
+          {
+            choice:'Dining out at a restaurant',
+            image: 'assets/images/eating2.png'
+          }
         ]
       },
       {
-        name: 'kitchen',
-        friendlyName: 'Do you usually:',
+        name: 'fun',
+        friendlyName: 'I prefer:',
         isMulti: true,
         multi: [
-          'Cook at home',
-          'Go out to dinner'
+          {
+            choice: 'Having fun with a close friend',
+            image: 'assets/images/fun.png'
+          },
+          {
+            choice: 'Attending large group activities',
+            image: 'assets/images/fun2.png'
+          }
         ]
       }
     ];
+  }
+
+  submitQuestionnaire() {
+    this.history.push({
+      pathname: `/results`,
+      state: {
+        answers: this.answers,
+        coords: this.locationInfo.coords,
+        city: this.locationInfo.city
+      }
+    });
   }
 
   nextQuestion(evt) {
     let questionName = evt.target.dataset.name;
     let questionValue = evt.target.dataset.value;
 
+    this.questions[this.currentQuestion].classList.add('done');
+
     if (this.currentQuestion === this.questions.length - 1) {
       // End the questionnaire
       this.addAnswer(questionName, questionValue);
-      let coords = this.match.params.coords;
-      this.history.push({
-        pathname: `/results`, 
-        state: {
-          answers: this.answers,
-          coords
-        }
-      });
+      this.submitQuestionnaire();
     } else {
       this.addAnswer(questionName, questionValue);
       this.currentQuestion += 1;
@@ -102,7 +128,6 @@ export class AppQuestions {
     questions.forEach((question, index) => {
       let input;
       let className = 'question';
-      
       if (index === 0) {
         className = 'question active';
       }
@@ -110,7 +135,10 @@ export class AppQuestions {
       let options = [];
       question.multi.forEach((multi, index) => {
         options.push(
-          <button class="btn-next" data-name={question.name} data-value={index}>{multi}</button>
+          <button class="btn-next" data-name={question.name} data-value={index}>
+            <img src={multi.image} alt=""/>
+            <p>{multi.choice}</p>
+          </button>
         )
       });
 
@@ -136,9 +164,11 @@ export class AppQuestions {
 
     return (
       <div>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed, id sint beatae sunt totam hic ullam officiis neque eum accusantium. Harum voluptatibus quasi optio debitis, modi temporibus minima iure hic!
-        </p>
+        <div class="back">
+          <stencil-route-link url="/" exact={true}>
+            <span>&lt;</span> Location
+          </stencil-route-link>
+        </div>
         <div class="questions__container">
           {questionsHtml}
         </div>

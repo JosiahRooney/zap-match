@@ -1,14 +1,48 @@
 app-questions {
-  .question {
-    padding: 10px;
-    display: none;
 
+  .question {
+    position: absolute;
+    width: 100%;
+    background-color: #fff;
+    
     &.active {
-      display: block;
+      z-index: 1;
     }
   }
+
+  .question__name {
+    background-color: $zap-blue;
+    color: white;
+    text-align: center;
+    font-size: 24px;
+    padding: 40px;
+  }
+
   .question__input {
     text-align: center;
     padding-top: 20px;
+
+    button {
+      width: calc(48% - 10px);
+      display: inline-block;
+      border-radius: 0;
+      border: 2px solid $zap-dark-blue;
+      background-color: #fff;
+      color: $zap-dark-blue;
+      padding: 0;
+
+      img {
+        width: 100%;
+      }
+
+      p {
+        background-color: #fff;
+        width: 100%;
+        margin: 0;
+        padding: 15px 20px;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+    }
   }
 }

@@ -9,7 +9,7 @@ app-home {
 
     img {
       border-radius: 60px;
-      margin: 48px 5.5px 30px;
+      margin: 38px 5.5px 20px;
     }
   }
 
@@ -63,8 +63,9 @@ app-home {
   }
 
   .map {
-    height: 350px;
+    height: 320px;
     width: 100%;
+    transition: 0.2s opacity;
 
     .map-control {
       display: none;

@@ -36,3 +36,32 @@ button {
 .text-right {
   text-align: right;
 }
+
+.hide {
+  opacity: 0;
+  transition: 0.2s opacity;
+}
+
+.banner {
+    background-color: $zap-dark-blue;
+    color: white;
+
+    h1 {
+      margin: 0;
+      font-size: 14px;
+      padding: 10px 0 11px;
+    }
+  }
+
+.back {
+  position: absolute;
+  z-index: 2;
+  top: 10px;
+  left: 10px;
+  font-size: 12px;
+
+  stencil-route-link a {
+    color: white;
+    text-decoration: none;
+  }
+}
