@@ -2,7 +2,7 @@ app-agent {
   .agent {
 
     .agent__banner {
-      background-image: url('assets/images/Oakland.jpg');
+      background-image: url('https://s3-us-west-2.amazonaws.com/zapmatch/assets/images/Oakland.jpg');
       background-size: cover;
       height: 150px;
       position: relative;
@@ -103,7 +103,7 @@ app-agent {
         margin: auto;
         display: block;
         width: 380px;
-        height: 100px;
+        height: 80px;
         margin-top: 4px;
         border-radius: 4px;
         resize: none;

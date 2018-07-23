@@ -85,7 +85,7 @@ export class AppAgent {
         </div>
         <div class="agent__form">
           <div class="text-box">
-            <textarea name="agent-form-textarea" id="agent-form-textarea" placeholder={placeholder}></textarea>
+            <textarea name="agent-form-textarea" id="agent-form-textarea" value={placeholder}></textarea>
           </div>
           <button id="agent-form-submit">Send</button>
         </div>
