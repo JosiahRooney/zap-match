@@ -70,16 +70,16 @@ export class AppAgent {
           <p>You are a <span>{this.agent.match}%</span> match with {this.agent.name.split(' ')[0]} based on:</p>
           <div class="compatibility-metrics">
             <div class="compatibility-metric">
-              ★<br />
-              Matching Point
+              <div class="image-container"><img src="assets/images/phone.png" alt=""/></div>
+              Communication Style
             </div>
             <div class="compatibility-metric">
-              ⚫<br />
-              Compatibility Metric
+              <div class="image-container"><img src="assets/images/leaf.png" alt=""/></div>
+              Experience with 1st-time buyers
             </div>
             <div class="compatibility-metric">
-              🔺<br />
-              Other Metric
+              <div class="image-container"><img src="assets/images/calendar.png" alt=""/></div>
+              Availability schedule
             </div>
           </div>
         </div>

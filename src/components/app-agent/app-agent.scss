@@ -75,8 +75,7 @@ app-agent {
 
       .compatibility-metrics {
         font-size: 14px;
-        text-transform: uppercase;
-        padding: 0 25px;
+        padding: 5px 20px 0;
         line-height: 1.5;
       }
 
@@ -84,7 +83,11 @@ app-agent {
         display: inline-block;
         vertical-align: top;
         width: 33%;
-        padding: 3%;
+        padding: 2%;
+
+        .image-container {
+          height: 50px;
+        }
       }
     }
 
