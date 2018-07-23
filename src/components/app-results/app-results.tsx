@@ -40,15 +40,16 @@ export class AppResults {
   currentAgent: Number;
   currentAgentObj: Object;
   viewMoreBtns: Array<any> = [];
+  backBtn: HTMLDivElement;
 
   constructor() {
     this.handleViewMoreBtnClick = this.handleViewMoreBtnClick.bind(this);
+    this.handleBackBtnClick = this.handleBackBtnClick.bind(this);
   }
 
   handleViewMoreBtnClick(num) {
     this.currentAgent = num;
     this.currentAgentObj = this.agents[Number(this.currentAgent)];
-    console.log(this.currentAgentObj)
     this.history.push({
       pathname: `/agent`,
       state: {
@@ -57,12 +58,17 @@ export class AppResults {
     });
   }
 
+  handleBackBtnClick() {
+    this.history.go(-1);
+  }
+
   bindEvents() {
     this.viewMoreBtns.forEach((btn, idx) => {
       btn.addEventListener('click', () => {
         this.handleViewMoreBtnClick(idx);
       });
     });
+    this.backBtn.addEventListener('click', this.handleBackBtnClick);
   }
 
   componentDidLoad() {
@@ -78,6 +84,7 @@ export class AppResults {
     viewMoreBtns.each((btn) => {
       this.viewMoreBtns.push(btn);
     });
+    this.backBtn = document.querySelector('.back');
     this.bindEvents();
   }
 
@@ -120,7 +127,10 @@ export class AppResults {
     let agentCards = this.generateAgentCardHTML();
     return (
       <div class="app-results">
-        <p>You matched with these agents:</p>
+        <div class="back">
+          <span></span>
+        </div>
+        <p>Congratulations! You are one step closer to finding your dream home. These agents are experts and ready to help:</p>
         {agentCards}
       </div>
     );

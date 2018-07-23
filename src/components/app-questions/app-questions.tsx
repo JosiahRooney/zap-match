@@ -14,10 +14,13 @@ export class AppQuestions {
   questions: Array<HTMLElement> = [];
   answers: Array<Object> = [];
   currentQuestion: number = 0;
+  backBtn: HTMLDivElement;
 
   constructor() {
     this.nextQuestion = this.nextQuestion.bind(this);
+    this.lastQuestion = this.lastQuestion.bind(this);
     this.submitQuestionnaire = this.submitQuestionnaire.bind(this);
+    this.handleBackBtnClick = this.handleBackBtnClick.bind(this);
   }
 
   componentDidLoad() {
@@ -28,6 +31,7 @@ export class AppQuestions {
       });
     }
     this.locationInfo = this.history.location.state.locationInfo;
+    this.backBtn = document.querySelector('.back');
     this.bindEvents();
   }
 
@@ -39,7 +43,7 @@ export class AppQuestions {
     return [
       {
         name: 'learning',
-        friendlyName: 'I prefer:',
+        friendlyName: 'Pick One:',
         isMulti: true,
         multi: [
           {
@@ -54,7 +58,7 @@ export class AppQuestions {
       },
       {
         name: 'eating',
-        friendlyName: 'I prefer:',
+        friendlyName: 'Pick One:',
         isMulti: true,
         multi: [
           {
@@ -69,7 +73,7 @@ export class AppQuestions {
       },
       {
         name: 'fun',
-        friendlyName: 'I prefer:',
+        friendlyName: 'Pick One:',
         isMulti: true,
         multi: [
           {
@@ -114,12 +118,29 @@ export class AppQuestions {
     }
   }
 
+  lastQuestion() {
+    this.questions[this.currentQuestion].classList.remove('done');
+    if (this.currentQuestion === 0) {
+      this.history.go(-1);
+    } else {
+      this.currentQuestion -= 1;
+      tsdom('.question.active').removeClass('active');
+      this.questions[this.currentQuestion].classList.add('active');
+    }
+  }
+
+  handleBackBtnClick() {
+    this.lastQuestion();
+  }
+
   bindEvents() {
     let nextBtns = tsdom('.btn-next');
 
     nextBtns.each(btn => {
       btn.addEventListener('click', this.nextQuestion);
     });
+
+    this.backBtn.addEventListener('click', this.handleBackBtnClick);
   }
 
   generateQuestionsHtml() {
@@ -165,9 +186,7 @@ export class AppQuestions {
     return (
       <div>
         <div class="back">
-          <stencil-route-link url="/" exact={true}>
-            <span>&lt;</span> Location
-          </stencil-route-link>
+          <span></span>
         </div>
         <div class="questions__container">
           {questionsHtml}

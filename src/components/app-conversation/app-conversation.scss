@@ -1,0 +1,139 @@
+app-conversation {
+  .app-conversation {
+
+    p {
+      margin: 0;
+    }
+
+    .conversation-bar {
+      background-color: $zap-blue;
+      text-align: center;
+      color: white;
+      padding-bottom: 2px;
+      position: relative;
+
+      .back-button {
+        $width: 15px;
+        border-left: 2px solid white;
+        border-bottom: 2px solid white;
+        width: $width;
+        height: $width;
+        z-index: 1;
+        position: absolute;
+        left: 30px;
+        top: 50%;
+        margin-top: -($width / 2);
+        transform: rotate(45deg)
+      }
+    }
+
+    .profile {
+
+      img {
+        height: auto;
+        width: 40px;
+        margin-top: 10px;
+      }
+
+      p {
+        margin: -2px auto 5px;
+      }
+    }
+
+    .conversation {
+
+      .conversation-bubble {
+        margin: 24px;
+
+        &.left-bubble {
+          
+          p {
+            background-color: #f3f3f3;
+            display: inline-block;
+            padding: 8px 20px;
+            font-size: 20px;
+            color: rgba(0, 0, 0, 0.29);
+            border-radius: 10px;
+            position: relative;
+
+            &:after {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 82%;
+              width: 0;
+              height: 0;
+              border: 14px solid transparent;
+              border-right-color: #f3f3f3;
+              border-left: 0;
+              border-bottom: 0;
+              margin-top: -11.5px;
+	            margin-left: -13px;
+            }
+          }
+        }
+
+        &.right-bubble {
+          text-align: right;
+
+          p {
+            background-color: #e9f1fc;
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 10px;
+            position: relative;
+
+            &:after {
+              content: '';
+              position: absolute;
+              right: 0;
+              top: 82%;
+              width: 0;
+              height: 0;
+              border: 14px solid transparent;
+              border-left-color: #e9f1fc;
+              border-right: 0;
+              border-bottom: 0;
+              margin-top: -11.5px;
+	            margin-right: -13px;
+            }
+          }
+        }
+      }
+    }
+
+    .conversation-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(1, 32, 79, 0.55);
+      color: white;
+      z-index: 1;
+    }
+
+    .conversation-overlay__inner {
+      text-align: center;
+      width: 64vw;
+      margin: auto;
+      position: relative;
+      top: 50%;
+      margin-top: -80px;
+
+      p {
+        font-size: 20px;
+      }
+
+      input {
+        height: 50px;
+        width: 100%;
+        font-size: 15px;
+        padding: 0 20px;
+        margin-top: 20px;
+        border-radius: 4px;
+        border: none;
+      }
+    }
+  }
+}

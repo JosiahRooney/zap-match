@@ -56,12 +56,17 @@ button {
 .back {
   position: absolute;
   z-index: 2;
-  top: 10px;
-  left: 10px;
+  top: 13px;
+  left: 13px;
   font-size: 12px;
 
-  stencil-route-link a {
-    color: white;
-    text-decoration: none;
+  span {
+    $delta: 12px;
+    height: $delta;
+    width: $delta;
+    transform: rotate(45deg);
+    border-left: 2px solid white;
+    border-bottom: 2px solid white;
+    display: block;
   }
 }

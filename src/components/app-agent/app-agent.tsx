@@ -8,13 +8,44 @@ import { RouterHistory } from '@stencil/router';
 export class AppAgent {
   @Prop() history: RouterHistory;
   agent: any;
+  message: String;
+  textarea: HTMLTextAreaElement;
+  submitButton: HTMLButtonElement;
+  backBtn: HTMLDivElement;
+
+  constructor() {
+    this.handleSubmitForm = this.handleSubmitForm.bind(this);
+    this.handleBackBtnClick = this.handleBackBtnClick.bind(this);
+  }
 
   componentDidLoad() {
-    console.log(this.agent);
+    this.textarea = document.querySelector('#agent-form-textarea');
+    this.submitButton = document.querySelector('#agent-form-submit');
+    this.backBtn = document.querySelector('.back');
+    this.bindEvents();
+  }
+
+  handleSubmitForm() {
+    if (this.textarea.value) {
+      this.message = this.textarea.value;
+      this.history.push(`/conversation`, {
+        message: this.message,
+        agent: this.agent
+      });
+    }
+  }
+
+  handleBackBtnClick() {
+    this.history.go(-1);
+  }
+
+  bindEvents() {
+    this.submitButton.addEventListener('click', this.handleSubmitForm);
+    this.backBtn.addEventListener('click', this.handleBackBtnClick);
   }
 
   generateAgentHTML() {
-    let placeholder = `Hi ${this.agent.name.split(' ')[0]}, I'm looking to buy a home in San Francisco and hoping you can help me with the process.`;
+    let placeholder = `Hi ${this.agent.name.split(' ')[0]}, I'm looking to buy a home in ${this.agent.city.split(',')[0]} and hoping you can help me with the process.`;
     return (
       <div class="agent">
         <div class="agent__banner">
@@ -56,7 +87,7 @@ export class AppAgent {
           <div class="text-box">
             <textarea name="agent-form-textarea" id="agent-form-textarea" placeholder={placeholder}></textarea>
           </div>
-          <button>Send</button>
+          <button id="agent-form-submit">Send</button>
         </div>
       </div>
     )
@@ -68,6 +99,9 @@ export class AppAgent {
 
     return (
       <div>
+        <div class="back">
+          <span></span>
+        </div>
         {html}
       </div>
     );

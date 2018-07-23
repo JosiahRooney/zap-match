@@ -26,7 +26,6 @@ declare global {
 }
 
 import '@stencil/router';
-import '@stencil/state-tunnel';
 
 import {
   MatchResults,
@@ -69,6 +68,39 @@ declare global {
 declare global {
 
   namespace StencilComponents {
+    interface AppConversation {
+      'history': RouterHistory;
+    }
+  }
+
+  interface HTMLAppConversationElement extends StencilComponents.AppConversation, HTMLStencilElement {}
+
+  var HTMLAppConversationElement: {
+    prototype: HTMLAppConversationElement;
+    new (): HTMLAppConversationElement;
+  };
+  interface HTMLElementTagNameMap {
+    'app-conversation': HTMLAppConversationElement;
+  }
+  interface ElementTagNameMap {
+    'app-conversation': HTMLAppConversationElement;
+  }
+  namespace JSX {
+    interface IntrinsicElements {
+      'app-conversation': JSXElements.AppConversationAttributes;
+    }
+  }
+  namespace JSXElements {
+    export interface AppConversationAttributes extends HTMLAttributes {
+      'history'?: RouterHistory;
+    }
+  }
+}
+
+
+declare global {
+
+  namespace StencilComponents {
     interface AppHome {
       'history': RouterHistory;
     }
@@ -94,39 +126,6 @@ declare global {
   namespace JSXElements {
     export interface AppHomeAttributes extends HTMLAttributes {
       'history'?: RouterHistory;
-    }
-  }
-}
-
-
-declare global {
-
-  namespace StencilComponents {
-    interface AppProfile {
-      'match': MatchResults;
-    }
-  }
-
-  interface HTMLAppProfileElement extends StencilComponents.AppProfile, HTMLStencilElement {}
-
-  var HTMLAppProfileElement: {
-    prototype: HTMLAppProfileElement;
-    new (): HTMLAppProfileElement;
-  };
-  interface HTMLElementTagNameMap {
-    'app-profile': HTMLAppProfileElement;
-  }
-  interface ElementTagNameMap {
-    'app-profile': HTMLAppProfileElement;
-  }
-  namespace JSX {
-    interface IntrinsicElements {
-      'app-profile': JSXElements.AppProfileAttributes;
-    }
-  }
-  namespace JSXElements {
-    export interface AppProfileAttributes extends HTMLAttributes {
-      'match'?: MatchResults;
     }
   }
 }
