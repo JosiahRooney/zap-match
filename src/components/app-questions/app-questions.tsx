@@ -47,11 +47,11 @@ export class AppQuestions {
         isMulti: true,
         multi: [
           {
-            choice: 'Learning things on my own',
+            choice: 'Learning on my own',
             image: 'assets/images/learning2.png'
           },
           {
-            choice: 'Having someone teach me',
+            choice: 'Learning from someone else',
             image: 'assets/images/learning.png'
           }
         ]
@@ -77,11 +77,11 @@ export class AppQuestions {
         isMulti: true,
         multi: [
           {
-            choice: 'Having fun with a close friend',
+            choice: 'Hanging out with a close friend',
             image: 'assets/images/fun.png'
           },
           {
-            choice: 'Attending large group activities',
+            choice: 'Hanging out with a large group',
             image: 'assets/images/fun2.png'
           }
         ]
